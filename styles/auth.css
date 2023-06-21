@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --text: #faf6f5;
+  --background: #180e0b;
+  --primary-button: #ccba93;
+  --secondary-button: #1f2310;
+  --accent: #c2cc93;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
+body {
+  color: var(--text);
+  background-color: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.home__link{
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.home__link span{
+  color: var(--text);
+}
+
+.home__link span:active{
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.form__container {
+  border: 1px solid var(--accent);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  width: 350px;
+}
+
+.form__container h1 {
+  font-size: 20px;
+  position: relative;
+}
+
+.form__container h1::after {
+  position: absolute;
+  content: "";
+  width: 7%;
+  height: 2.5px;
+  background-color: var(--accent);
+  bottom: -5px;
+  left: 0;
+}
+
+.form__container form {
+  margin-top: 15px;
+}
+
+.input__container {
+  position: relative;
+  margin-top: 15px;
+}
+
+.input {
+  background-color: transparent;
+  border: 2px solid var(--accent);
+  width: 100%;
+  padding: 15px;
+  color: var(--text);
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+.input option{
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.input__label {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: var(--text);
+  font-size: 1em;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+/* Selects element of class input__label that is preceeded by an element of class input that does not have its placeholder shown */
+
+.input:not(:placeholder-shown   ) ~ .input__label,
+.input:focus ~ .input__label {
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.7em;
+  top: 0;
+  left: 2px;
+  background-color: var(--background);
+  padding-inline: 10px;
+  border-left: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  letter-spacing: 0.2em;
+}
+
+.invalid{
+  color: crimson;
+  margin-top: 5px;
+}
+
+.page-link{
+  text-decoration: none;
+  color: var(--accent);
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.page-link:active{
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.submit__btn{
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: var(--primary-button);
+  border: none;
+  color: var(--background);
+  cursor: pointer;
+}
