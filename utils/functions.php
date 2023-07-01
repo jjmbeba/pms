@@ -96,7 +96,10 @@ function createUser($conn, $username, $email, $acType, $password, $statementErr)
     } elseif ($_SESSION['acType'] === 'manager') {
         header("location: ../dashboard/manager.php");
         exit();
-    }
+    } elseif ($_SESSION['acType'] === 'admin') {
+        header("location: ../dashboard/admin.php");
+        exit();
+    } 
 }
 
 function loginUser($conn, $username, $password, $statementErr)

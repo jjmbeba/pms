@@ -103,6 +103,9 @@ if (isset($_POST['submit'])) {
                     "; ?>
                 </div>
             </div>
+            <a href="forgot-password.php" class="page-link">
+                Forgot your password?
+            </a>
             <a href="signup.php" class="page-link">
                 Don't have an account?
             </a>
