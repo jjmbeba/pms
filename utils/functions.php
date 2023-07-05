@@ -15,13 +15,13 @@ function sanitizeInput($input)
     exit();
 }
 
-function emailExists($conn, $email, $statementErr)
+function emailExists($conn, $email)
 {
     $sql = "SELECT * FROM users WHERE email = ?";
     $statement = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($statement, $sql)) {
-        $statementErr = "Statement failed";
+        echo "Statement failed";
         exit();
     }
 
@@ -40,7 +40,7 @@ function emailExists($conn, $email, $statementErr)
     mysqli_stmt_close($statement);
 }
 
-function usernameExists($conn, $username, $statementErr)
+function usernameExists($conn, $username)
 {
     $sql = "SELECT * FROM users WHERE username = ?";
     $statement = mysqli_stmt_init($conn);
@@ -99,7 +99,7 @@ function createUser($conn, $username, $email, $acType, $password, $statementErr)
     } elseif ($_SESSION['acType'] === 'admin') {
         header("location: ../dashboard/admin.php");
         exit();
-    } 
+    }
 }
 
 function loginUser($conn, $username, $password, $statementErr)
@@ -107,7 +107,7 @@ function loginUser($conn, $username, $password, $statementErr)
     //Check if email exists
     $usernameExists = usernameExists($conn, $username, $statementErr);
     if ($usernameExists === false) {
-        return array(false, "Email does not exist");
+        return array(false, "Account does not exist");
         exit();
     }
 
@@ -139,4 +139,86 @@ function loginUser($conn, $username, $password, $statementErr)
             exit();
         }
     }
+}
+
+function changeDetails($conn, $newUsername, $newEmail)
+{
+    //Store the existing username
+    $existingName = $_SESSION['username'];
+
+    //Check if new username exists
+    $usernameExists = usernameExists($conn, $newUsername);
+
+    //Fetch the user and store the user Id
+    $user = usernameExists($conn, $existingName);
+    $userId = $user['id'] ?? '';
+
+    //Check if email exists
+    $emailExists = emailExists($conn, $newEmail);
+
+    //If the username and email exists, return the appropriate error
+    if ($usernameExists && $emailExists) {
+        return array(false, "Account with the same details already exists");
+        exit();
+    }
+
+    //Create a SQL query
+    $sql = "UPDATE users SET username=?, email=? WHERE id = ?;";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return "Statement failed";
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "ssd", $newUsername, $newEmail, $userId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "Account details changed successfully");
+}
+
+function changePassword($conn, $currentPass, $newPass)
+{
+    //Store the existing username
+    $existingName = $_SESSION['username'];
+
+    //Fetch the user and store the user Id
+    $user = usernameExists($conn, $existingName);
+    $userId = $user['id'] ?? '';
+
+    //Store the correct user password
+    $dbPass = $user['password'] ?? '';
+
+    //Compare the password and the current password
+    $checkPassword = password_verify($currentPass, $dbPass);
+
+    //Return an error if the passwords do not match
+    if (!$checkPassword) {
+        return array(false, "Wrong password");
+    }
+
+    //Create a SQL query
+    $sql = "UPDATE users SET password=? WHERE id = ?;";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return "Statement failed";
+        exit();
+    }
+
+    //Hash the new password
+    $hashPass = password_hash($newPass, PASSWORD_DEFAULT);
+
+    mysqli_stmt_bind_param($statement, "sd", $hashPass, $userId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "Account details changed successfully");
 }

@@ -14,6 +14,7 @@ if(empty($_SESSION['username'])){
   <title>Profile</title>
   <style>
     <?php include '../styles/header.css'; ?>
+    <?php include '../styles/profile.css'; ?>
   </style>
 </head>
 

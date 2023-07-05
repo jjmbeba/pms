@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
         $email = sanitizeInput($_POST['email']);
 
         //Check email format
-        if (!filter_var($email, FILTER_SANITIZE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $emailErr = "Invalid email format";
         }
 
@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div class="input__container">
-                <input type="email" name="email" class="input" placeholder=" " value="<?php echo $email; ?>">
+                <input type="text" name="email" class="input" placeholder=" " value="<?php echo $email; ?>">
                 <label for="email" class="input__label">Email</label>
                 <div class="invalid" style="<?php echo $emailErr ? 'display:block;' : 'display:none;' ?>">
                     <?php echo "
@@ -143,7 +143,8 @@ if (isset($_POST['submit'])) {
                 <label for="acType" class="input__label">Account Type</label>
             </div>
             <div class="input__container">
-                <input type="password" name="password" class="input" placeholder=" " value="<?php echo $password; ?>">
+                <input type="password" name="password" class="input password" placeholder=" " value="<?php echo $password; ?>">
+                <img src="../assets/eyeshut.svg" class="password__controls" alt="hidden">
                 <label for="password" class="input__label">Password</label>
                 <div class="invalid" style="<?php echo $passwordErr ? 'display:block;' : 'display:none;' ?>">
                     <?php echo "
@@ -155,7 +156,8 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
             <div class="input__container">
-                <input type="password" name="cpassword" class="input" placeholder=" " value="<?php echo $confirmPassword; ?>">
+                <input type="password" name="cpassword" class="input password" placeholder=" " value="<?php echo $confirmPassword; ?>">
+                <img src="../assets/eyeshut.svg" class="password__controls" alt="hidden">
                 <label for="cpassword" class="input__label">Confirm Password</label>
                 <div class="invalid" style="<?php echo $confirmPasswordErr ? 'display:block;' : 'display:none;' ?>">
                     <?php echo "
@@ -180,6 +182,22 @@ if (isset($_POST['submit'])) {
             <input class="submit__btn" type="submit" name="submit" value="Create an account">
         </form>
     </div>
+    <script>
+        let passwordControls = document.querySelectorAll('.password__controls');
+
+        passwordControls.forEach((field) => {
+            let passwordField = field.previousElementSibling;
+            field.addEventListener('click', () => {
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    field.src = '/pms/assets/eye.svg';
+                } else {
+                    passwordField.type = 'password';
+                    field.src = '/pms/assets/eyeshut.svg';
+                }
+            })
+        })
+    </script>
 </body>
 
 </html>

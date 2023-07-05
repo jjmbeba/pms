@@ -5,16 +5,6 @@ if(empty($_SESSION['username'])){
     header('location: ../auth/login.php');
 }
 
-$destination = "";
-
-if ($_SESSION['acType'] === 'driver') {
-  $destination = '../profile/driver.php';
-} elseif ($_SESSION['acType'] === 'manager') {
-  $destination = '../profile/manager.php';
-} elseif ($_SESSION['acType'] === 'admin') {
-  $destination = '../profile/admin.php';
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +26,7 @@ if ($_SESSION['acType'] === 'driver') {
     </span>
     <div class="buttons_container">
       <!-- <a href=""  class="signUp">My Profile</a> -->
-      <a class="profile__container" href="<?php echo $destination;?>">
+      <a class="profile__container" href="../profile/changeDetails.php">
         <div class="profile__img">
           <img src="../assets/user.svg" alt="user-image">
         </div>
