@@ -2,8 +2,11 @@
 
 require_once('../config/database.php');
 require_once('../utils/functions.php');
+require_once('../common/theme.php');
+
 
 session_start();
+
 if (isset($_SESSION['username'])) {
     if ($_SESSION['acType'] === 'driver') {
         //Redirect to driver dashboard
@@ -103,12 +106,12 @@ if (isset($_POST['submit'])) {
     </style>
 </head>
 
-<body>
+<body class="<?php echo $theme;?>">
     <a href="/pms" class="home__link">
         <img src="../assets/home.svg" alt="home" />
         <span>Home</span>
     </a>
-    <div class="form__container">
+    <?php echo $theme === 'dark' ? "<img class='theme__icon' src='/pms/assets/sun.svg' alt='sun'>" : "<img class='theme__icon' src='/pms/assets/moon.svg' alt='moon'>";?>    <div class="form__container">
         <h1>Create an account</h1>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
             <div class="input__container">
@@ -182,22 +185,8 @@ if (isset($_POST['submit'])) {
             <input class="submit__btn" type="submit" name="submit" value="Create an account">
         </form>
     </div>
-    <script>
-        let passwordControls = document.querySelectorAll('.password__controls');
+    <script src="/pms/script.js"></script>
 
-        passwordControls.forEach((field) => {
-            let passwordField = field.previousElementSibling;
-            field.addEventListener('click', () => {
-                if (passwordField.type === 'password') {
-                    passwordField.type = 'text';
-                    field.src = '/pms/assets/eye.svg';
-                } else {
-                    passwordField.type = 'password';
-                    field.src = '/pms/assets/eyeshut.svg';
-                }
-            })
-        })
-    </script>
 </body>
 
 </html>

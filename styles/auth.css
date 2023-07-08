@@ -1,21 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
-
-:root {
-  --text: #faf6f5;
-  --background: #180e0b;
-  --primary-button: #ccba93;
-  --secondary-button: #1f2310;
-  --accent: #c2cc93;
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter";
-}
+@import url('../styles/common.css');
 
 body {
   color: var(--text);
@@ -28,19 +11,19 @@ body {
   position: relative;
 }
 
-.home__link{
+.home__link {
   position: absolute;
   left: 20px;
-  top: 10px;
+  top: 27px;
   cursor: pointer;
   text-decoration: none;
 }
 
-.home__link span{
+.home__link span {
   color: var(--text);
 }
 
-.home__link span:active{
+.home__link span:active {
   color: var(--accent);
   text-decoration: underline;
 }
@@ -87,7 +70,7 @@ body {
   border-radius: 5px;
 }
 
-.input option{
+.input option {
   background-color: var(--accent);
   color: var(--background);
 }
@@ -104,7 +87,7 @@ body {
 
 /* Selects element of class input__label that is preceeded by an element of class input that does not have its placeholder shown */
 
-.input:not(:placeholder-shown   ) ~ .input__label,
+.input:not(:placeholder-shown) ~ .input__label,
 .input:focus ~ .input__label {
   transform: translateX(10px) translateY(-7px);
   font-size: 0.7em;
@@ -117,7 +100,7 @@ body {
   letter-spacing: 0.2em;
 }
 
-.password__controls{
+.password__controls {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -125,33 +108,33 @@ body {
   cursor: pointer;
 }
 
-.invalid{
+.invalid {
   color: crimson;
   margin-top: 5px;
 }
 
-.success{
-  color: #4BB543;
+.success {
+  color: #4bb543;
   margin-top: px;
 }
 
-.page-link{
+.page-link {
   text-decoration: none;
-  color: var(--accent);
+  color: var(--text);
   margin-top: 10px;
   display: inline-block;
 }
 
-.page-link:active{
+.page-link:active {
   color: var(--text);
   text-decoration: underline;
 }
 
-.submit__btn{
+.submit__btn {
   width: 100%;
   margin-top: 20px;
   padding: 10px 0;
-  background-color: var(--primary-button);
+  background-color: var(--text);
   border: none;
   color: var(--background);
   cursor: pointer;

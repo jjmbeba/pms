@@ -1,0 +1,92 @@
+@import url('../styles/common.css');
+
+.dashboard__container{
+    margin-left: -40px;
+    margin-top: 15px;
+    width: 100vw;
+    position: relative;
+    border-top: 2px solid var(--accent);
+    display: flex;
+}
+
+.sidebar{
+    position: fixed;
+    width: 20%;
+    height: 100vh;
+    border: 2px solid var(--primary);
+    border-top: none;
+    padding: 15px;
+}
+
+.report__list{
+    list-style: none;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.report__list li {
+    cursor: pointer;
+    color: var(--text);
+}
+
+.report__list li:active{
+    text-decoration: underline;
+}
+
+.report__list > .active{
+    font-weight: bold;
+    font-size: 120%;
+    text-decoration: underline;
+}
+
+.report__area{
+    margin-left: 20%;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.report__table{
+    border-collapse: collapse;
+    margin-left: 15%;
+    margin-top: 5%;
+}
+
+.report__table td, .report__table th{
+    border: 2px solid var(--primary);
+    padding: 8px;
+}
+
+td a{
+    text-decoration: none;
+    color: var(--text);
+}
+
+form input, td a{
+    padding: 4px 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit__btn{
+    background-color: var(--text);
+    color: var(--background);
+}
+
+.delete__btn{
+    background-color: crimson;
+    color: white;
+}
+
+.invalid {
+    color: crimson;
+    margin-top: 10px;
+    margin-left: 15%;
+  }
+  
+  .success {
+    color: #4bb543;
+    margin-top: 10px;
+    margin-left: 15%;
+  }

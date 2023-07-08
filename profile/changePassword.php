@@ -48,9 +48,9 @@ if (isset($_POST['submit'])) {
         $result = changePassword($conn, $password, $newPassword);
 
         //If the result returns an error, display it
-        if(!empty($result) && $result[0] === false){
+        if (!empty($result) && $result[0] === false) {
             $statementErr = $result[1];
-        } elseif(!empty($result) && $result[0] === true){
+        } elseif (!empty($result) && $result[0] === true) {
             $successMessage = $result[1];
         }
     }
@@ -124,22 +124,4 @@ if (isset($_POST['submit'])) {
             <input class="submit__btn" type="submit" name="submit" value="Change Details">
         </form>
     </div>
-</body>
-<script>
-    let passwordControls = document.querySelectorAll('.password__controls');
-
-    passwordControls.forEach((field) => {
-        let passwordField = field.previousElementSibling;
-        field.addEventListener('click', () => {
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                field.src = '/pms/assets/eye.svg';
-            } else {
-                passwordField.type = 'password';
-                field.src = '/pms/assets/eyeshut.svg';
-            }
-        })
-    })
-</script>
-
-</html>
+    <?php include 'footer.php'; ?>

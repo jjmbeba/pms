@@ -1,25 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-:root {
-  --text: #faf6f5;
-  --background: #180e0b;
-  --primary-button: #ccba93;
-  --secondary-button: #1f2310;
-  --accent: #c2cc93;
-}
-
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Inter";
-}
-
-html {
-  scroll-behavior: smooth;
-}
+@import url('../styles/common.css');
 
 body {
   background-color: var(--background);
@@ -35,6 +14,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .logo {
@@ -53,7 +33,7 @@ nav {
 }
 
 .links_container li a {
-  color: white;
+  color: var(--text);
   position: relative;
   text-decoration: none;
 }
@@ -90,7 +70,7 @@ nav {
   text-decoration: none;
 }
 
-.profile__container{
+.profile__container {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -99,12 +79,11 @@ nav {
   color: var(--text);
 }
 
-
-.profile__container:active{
+.profile__container:active {
   opacity: 0.5;
 }
 
-.profile__img{
+.profile__img {
   width: 35px;
   height: 35px;
   background: gray;
@@ -114,24 +93,24 @@ nav {
   justify-content: center;
 }
 
-.profile__img img{
+.profile__img img {
   width: 80%;
-} 
+}
 
 .login {
-  background: var(--background);
-  color: var(--text);
+  background: var(--text);
+  color: var(--background);
   border: 1px solid var(--accent);
   padding: 1px;
 }
 
-.login:active{
-  background-color: var(--text);
-  color: var(--background);
+.login:active {
+  background-color: var(--background);
+  color: var(--text);
 }
 
 .signUp {
-  background-color: var(--primary-button);
+  background-color: var(--text);
   outline: none;
   border: none;
   color: var(--background);

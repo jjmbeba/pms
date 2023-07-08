@@ -9,7 +9,7 @@
 <?php include 'header.php'; ?>
 
 <body>
-    Parking Lot Manager dashboard <br/>
-    <?php echo 'Welcome ' . $_SESSION['username'];?>
-</body>
-</html>
+    Parking Lot Manager dashboard <br />
+    <?php echo 'Welcome ' . $_SESSION['username']; ?>
+
+    <?php include 'footer.php'; ?>

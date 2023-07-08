@@ -111,6 +111,4 @@ if (isset($_POST['submit'])) {
             <input class="submit__btn" type="submit" name="submit" value="Change Details">
         </form>
     </div>
-</body>
-
-</html>
+    <?php include 'footer.php';?>

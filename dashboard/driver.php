@@ -11,5 +11,4 @@
 <body>
     Driver dashboard
     <?php echo 'Welcome ' . $_SESSION['username'];?>
-</body>
-</html>
+<?php include 'footer.php';?>

@@ -222,3 +222,33 @@ function changePassword($conn, $currentPass, $newPass)
 
     return array(true, "Account details changed successfully");
 }
+
+function getUsers($conn){
+    //Create a SQL query
+    $sql = "SELECT * FROM users";
+
+    //Execute the query
+    $result = $conn->query($sql);
+
+    return $result;
+}
+
+function deleteUser($conn, $userId){
+    //Create a SQL query
+    $sql = "DELETE FROM users WHERE id=?";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false,"Statement failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "d", $userId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "User deleted successfully");
+}

@@ -1,4 +1,7 @@
 <?php
+
+require_once('../common/theme.php');
+
 session_start();
 if(empty($_SESSION['username'])){
     header('location: ../auth/login.php');
@@ -18,15 +21,14 @@ if(empty($_SESSION['username'])){
   </style>
 </head>
 
-<body>
+<body class="<?php echo $theme;?>">
   <nav>
     <span class="logo">
       Parkit.
     </span>
     <div class="buttons_container">
-      <!-- <a href=""  class="signUp">My Profile</a> -->
       <a class="profile__container">
-      <div class="profile__img">
+        <div class="profile__img">
           <img src="../assets/user.svg" alt="user-image">
         </div>  
         <?php echo htmlspecialchars($_SESSION['username']);?>
@@ -34,3 +36,5 @@ if(empty($_SESSION['username'])){
       <a href="../auth/logout.php"  class="login">Log out</a>
     </div>
   </nav>
+  <?php echo $theme === 'dark' ? "<img class='theme__icon' src='/pms/assets/sun.svg' alt='sun'>" : "<img class='theme__icon' src='/pms/assets/moon.svg' alt='moon'>"; ?> <div class="form__container">
+  

@@ -1,4 +1,5 @@
 <?php
+require_once('../common/theme.php');
 
 session_start();
 if(empty($_SESSION['username'])){
@@ -16,16 +17,17 @@ if(empty($_SESSION['username'])){
   <title>Parkit.</title>
   <style>
     <?php include '../styles/header.css'; ?>
+    <?php include '../styles/dashboard.css'; ?>
   </style>
 </head>
 
-<body>
+<body class="<?php echo $theme;?>">
   <nav>
     <span class="logo">
       Parkit.
     </span>
+    <?php echo $theme === 'dark' ? "<img class='theme__icon' src='/pms/assets/sun.svg' alt='sun'>" : "<img class='theme__icon' src='/pms/assets/moon.svg' alt='moon'>"; ?> <div class="form__container">
     <div class="buttons_container">
-      <!-- <a href=""  class="signUp">My Profile</a> -->
       <a class="profile__container" href="../profile/changeDetails.php">
         <div class="profile__img">
           <img src="../assets/user.svg" alt="user-image">

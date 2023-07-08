@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --text: #180e0b;
+  --background: #faf6f5;
+  --primary: #ccba93;
+  --secondary: #eaedd8;
+  --accent: #c2cc93;
+}
+
+.dark {
+  --text: #faf6f5;
+  --background: #180e0b;
+  --primary-button: #ccba93;
+  --secondary-button: #1f2310;
+  --accent: #c2cc93;
+}
+
+/* --text: #faf6f5;
+--background: #180e0b;
+--primary-button: #ccba93;
+--secondary-button: #1f2310;
+--accent: #c2cc93; */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter";
+}
+
+.theme__icon{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 27px;
+  right: 25%;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
