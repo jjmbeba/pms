@@ -332,3 +332,43 @@ function getAllLots($conn)
 
     return $result;
 }
+
+function editLot($conn, $lotId, $name, $location, $capacity, $price){
+    //Create a SQL query
+    $sql = "UPDATE lots SET name=?, location= ?,capacity = ?, price = ? WHERE id = ?;";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false,"Statement failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "ssddd", $name, $location, $capacity, $price, $lotId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "Lot details changed successfully");
+}
+
+function deleteLot($conn, $lotId){
+    //Create a SQL query
+    $sql = "DELETE FROM lots WHERE id = ?";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false,"Statement failed");
+        exit();
+    } 
+    
+    mysqli_stmt_bind_param($statement, "d", $lotId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "Lot record deleted successfully");
+}

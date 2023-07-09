@@ -41,6 +41,32 @@
   text-decoration: underline;
 }
 
+.card__container{
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card{
+  background-color: var(--primary);
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--background);
+  width: 250px;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+.card span{
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat{
+  color: var(--secondary);
+}
+
 .report__area {
   margin-left: 20%;
   flex-grow: 1;
@@ -178,7 +204,7 @@ dialog::backdrop {
   letter-spacing: 0.2em;
 }
 
-#close__btn, #closeCreateModal__btn {
+.closeEditLotbtn, .closeEditUserbtn ,#closeCreateModal__btn {
   width: 18px;
   position: absolute;
   right: 8%;

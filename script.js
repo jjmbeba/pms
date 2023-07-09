@@ -9,6 +9,7 @@ let createModal = document.querySelector('.createLot__modal');
 const tabs = document.querySelectorAll('[data-tab-target]');
 const tabContents = document.querySelectorAll('[data-tab-content]');
 
+//Sidebar tabs logic
 tabs.forEach(tab => {
   tab.addEventListener('click',() => {
     const target = document.querySelector(tab.dataset.tabTarget);
@@ -34,6 +35,7 @@ closeCreateLotBtn.addEventListener('click',() => {
   createModal.close();
 });
 
+//Password hidden and unhidden logic
 passwordControls.forEach((field) => {
   let passwordField = field.previousElementSibling;
   field.addEventListener("click", () => {
@@ -47,6 +49,7 @@ passwordControls.forEach((field) => {
   });
 });
 
+//Theme logic
 themeIcon.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 
@@ -62,13 +65,15 @@ themeIcon.addEventListener("click", () => {
   document.cookie = "theme=" + theme + "; path=/;";
 });
 
-editBtn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    editModal.showModal();
-  });
-})
 
-closeButton.addEventListener("click", () => {
-  editModal.close();
-});
+//Edit user logic
+// editBtn.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     editModal.showModal();
+//   });
+// })
+
+// closeButton.addEventListener("click", () => {
+//   editModal.close();
+// });
 

@@ -7,6 +7,8 @@ require_once('../common/theme.php');
 //Initialize variables
 $successMessage = $statementErr  = '';
 
+
+
 //Fetch all users in the database
 $users = getUsers($conn);
 
@@ -52,12 +54,14 @@ if (isset($_GET['success'])) {
         </div>
         <div class="report__area">
             <div id="overview" data-tab-content class="active overview">
-                This is an overview : 
-                <div class="card">
-                    Number of users : <?php echo $numberOfUsers;?>
-                </div>
-                <div class="card">
-                    Number of parking lots : <?php echo $numberOfLots;?>
+                This is an overview :
+                <div class="card__container">
+                    <div class="card" id="userReportShortcut">
+                        <span>Number of users : </span><br /> <span class="stat"><?php echo $numberOfUsers; ?></span>
+                    </div>
+                    <div class="card">
+                        <span>Number of lots :</span><br /> <span class="stat"><?php echo $numberOfLots; ?></span>
+                    </div>
                 </div>
             </div>
             <div id="user" data-tab-content>
@@ -90,9 +94,29 @@ if (isset($_GET['success'])) {
                                 <td>$email</td>
                                 <td>$acType</td>
                                 <td>
-                                    <button class='edit__btn'>
+                                    <button class='editUserBtn'>
                                         Edit
                                     </button>
+                                    <dialog class='edit__modal editUserModal'>
+                                    $username
+                                    <div class='editForm__container'>
+                                    <form action='../actions/editUser.php'>
+                                    <img class='closeEditUserbtn' src='/pms/assets/closeDark.svg'/>
+                                    <h1>Change user details</h1>
+                                    <div class='input__container'>
+                                        <select name='acType' class='input'>
+                                            <option value='driver'>Driver</option>
+                                            <option value='manager'>Parking Lot Manager</option>
+                                            <option value='admin'>Administrator</option>
+                                        </select>
+                                        <label for='acType' class='input__label'>Account Type</label>
+                                        <input type='hidden' name='id' value='$userId'/>
+                                        <input type='hidden' name='redirect' value='$location'/>
+                                    </div>
+                                    <input class='submit__btn' type='submit' name='submit' value='Change user account'>
+                                </form>
+                                </div>
+                                </dialog>
                                 </td>
                                 <td>
                                     <a class='delete__btn' href='../actions/deleteUser.php?id=$userId&redirect=$location'>
@@ -100,25 +124,7 @@ if (isset($_GET['success'])) {
                                     </a>
                                 </td>
                             </tr>
-                            <dialog class='edit__modal'>
-                            <div class='editForm__container'>
-                            <form action='../actions/editUser.php'>
-                            <img id='close__btn' src='/pms/assets/closeDark.svg'/>
-                            <h1>Change user details</h1>
-                            <div class='input__container'>
-                                <select name='acType' class='input'>
-                                    <option value='driver'>Driver</option>
-                                    <option value='manager'>Parking Lot Manager</option>
-                                    <option value='admin'>Administrator</option>
-                                </select>
-                                <label for='acType' class='input__label'>Account Type</label>
-                                <input type='hidden' name='id' value='$userId'/>
-                                <input type='hidden' name='redirect' value='$location'/>
-                            </div>
-                            <input class='submit__btn' type='submit' name='submit' value='Change user account'>
-                            </form>
-                            </div>
-                            </dialog>
+                            
                             ";
                             }
                         }
@@ -161,7 +167,7 @@ if (isset($_GET['success'])) {
                         </thead>
                         <tbody>
                             <?php while ($row = $lots->fetch_assoc()) {
-                                $fetchedUserId = $row['id'];
+                                $fetchedId = $row['id'];
                                 $fetchedName = $row['name'];
                                 $fetchedLocation = $row['location'];
                                 $fetchedCapacity = $row['capacity'];
@@ -169,41 +175,54 @@ if (isset($_GET['success'])) {
 
                                 //Display the data
                                 echo "<tr>
-                                <td>$fetchedUserId</td>
+                                <td>$fetchedId</td>
                                 <td>$fetchedName</td>
                                 <td>$fetchedLocation</td>
                                 <td>$fetchedCapacity</td>
                                 <td>$fetchedPrice</td>
                                 <td>
-                                    <button class='edit__btn'>
+                                    <button class='editLotBtn'>
                                         Edit
                                     </button>
+                                    <dialog class='edit__modal editLotModal'>
+                                    $fetchedId
+                                    <div class='editForm__container'>
+                                    <form method='POST' action='../actions/editLot.php'>
+                                    <img class='closeEditLotbtn' src='/pms/assets/closeDark.svg'/>
+                                    <h1>Change user details</h1>
+                                    <div class='input__container'>
+                                        <input name='name' value='$fetchedName' placeholder=' ' class='input'/>
+                                        <label for='name' class='input__label'>Name</label>
+                                    </div>
+                                    <div class='input__container'>
+                                        <select name='location' class='input'>
+                                            <option value='nairobi'>Nairobi</option>
+                                            <option value='kisumu'>Kisumu</option>
+                                            <option value='mombasa'>Mombasa</option>
+                                        </select>
+                                        <label for='location' class='input__label'>Location</label>
+                                    </div>
+                                    <div class='input__container'>
+                                        <input name='capacity' value='$fetchedCapacity' placeholder=' ' class='input'/>
+                                        <label for='capacity' class='input__label'>Capacity</label>
+                                    </div>
+                                    <div class='input__container'>
+                                        <input name='price' value='$fetchedPrice' placeholder=' ' class='input'/>
+                                        <label for='price' class='input__label'>Price</label>
+                                    </div>
+                                    <input name='redirect' value='$location' type='hidden'/>
+                                    <input name='id' value='$fetchedId' type='hidden'/>
+                                    <input class='submit__btn' type='submit' name='submit' value='Change lot details'>
+                                    </form>
+                                    </div>
+                                </dialog>
                                 </td>
                                 <td>
-                                    <a class='delete__btn' href='../actions/deleteUser.php?id=$fetchedUserId&redirect=$location'>
+                                    <a class='delete__btn' href='../actions/deleteLot.php?id=$fetchedId&redirect=$location'>
                                         Delete
                                     </a>
                                 </td>
                             </tr>
-                            <dialog class='edit__modal'>
-                            <div class='editForm__container'>
-                            <form action='../actions/editUser.php'>
-                            <img id='close__btn' src='/pms/assets/closeDark.svg'/>
-                            <h1>Change user details</h1>
-                            <div class='input__container'>
-                                <select name='acType' class='input'>
-                                    <option value='driver'>Driver</option>
-                                    <option value='manager'>Parking Lot Manager</option>
-                                    <option value='admin'>Administrator</option>
-                                </select>
-                                <label for='acType' class='input__label'>Account Type</label>
-                                <input type='hidden' name='id' value='$userId'/>
-                                <input type='hidden' name='redirect' value='$location'/>
-                            </div>
-                            <input class='submit__btn' type='submit' name='submit' value='Change user account'>
-                            </form>
-                            </div>
-                            </dialog>
                             ";
                             } ?>
                         <?php endif ?>
@@ -225,9 +244,6 @@ if (isset($_GET['success'])) {
                     </div>
                     "; ?>
                 </div>
-                <button class="create__btn">
-                    Add a lot
-                </button>
                 <dialog class='createLot__modal'>
                     <div class='editForm__container'>
                         <form method="POST" action='../actions/addLot.php'>
@@ -287,4 +303,43 @@ if (isset($_GET['success'])) {
         </div>
     </div>
     </div>
+    <script>
+        const editUserBtns = document.querySelectorAll('.editUserBtn');
+        const editLotBtns = document.querySelectorAll('.editLotBtn');
+        const editUserModals = document.querySelectorAll('.editUserModal');
+        const editLotModals = document.querySelectorAll('.editLotModal');
+        const closeEditLotbtns = document.querySelectorAll('.closeEditLotbtn');
+        const closeEditUserbtns = document.querySelectorAll('.closeEditUserbtn');
+
+        editUserBtns.forEach((editUserBtn) => {
+            editUserBtn.addEventListener('click', (e) => {
+                const editUserDialog = e.target.nextElementSibling;
+                editUserDialog.showModal();
+            });
+        });
+
+        editLotBtns.forEach(editLotBtn => {
+            editLotBtn.addEventListener('click', (e) => {
+                const editLotDialog = e.target.nextElementSibling;
+                editLotDialog.showModal();
+            })
+        })
+
+
+        closeEditUserbtns.forEach((closeEditUserbtn) => {
+            closeEditUserbtn.addEventListener('click', () => {
+                editUserModals.forEach((modal) => {
+                    modal.close();
+                })
+            })
+        })
+
+        closeEditLotbtns.forEach((closeEditLotbtn) => {
+            closeEditLotbtn.addEventListener('click', () => {
+                editLotModals.forEach((modal) => {
+                    modal.close();
+                })
+            })
+        })
+    </script>
     <?php include 'footer.php'; ?>
