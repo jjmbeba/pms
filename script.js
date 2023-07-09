@@ -1,5 +1,38 @@
 let themeIcon = document.querySelector(".theme__icon");
 let passwordControls = document.querySelectorAll(".password__controls");
+let editBtn = document.querySelectorAll(".edit__btn");
+let editModal = document.querySelector(".edit__modal");
+let closeButton = document.getElementById("close__btn");
+let closeCreateLotBtn = document.getElementById("closeCreateModal__btn");
+let createBtn = document.querySelector('.create__btn');
+let createModal = document.querySelector('.createLot__modal');
+const tabs = document.querySelectorAll('[data-tab-target]');
+const tabContents = document.querySelectorAll('[data-tab-content]');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click',() => {
+    const target = document.querySelector(tab.dataset.tabTarget);
+
+    tabContents.forEach(tabContent => {
+      tabContent.classList.remove('active');
+    })
+
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+    })
+
+    tab.classList.add('active');
+    target.classList.add('active');
+  })
+})
+
+createBtn.addEventListener('click',() => {
+  createModal.showModal();
+})
+
+closeCreateLotBtn.addEventListener('click',() => {
+  createModal.close();
+});
 
 passwordControls.forEach((field) => {
   let passwordField = field.previousElementSibling;
@@ -26,5 +59,16 @@ themeIcon.addEventListener("click", () => {
     themeIcon.src = "/pms/assets/moon.svg";
   }
 
-  document.cookie = "theme="+theme+'; path=/;';
+  document.cookie = "theme=" + theme + "; path=/;";
 });
+
+editBtn.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    editModal.showModal();
+  });
+})
+
+closeButton.addEventListener("click", () => {
+  editModal.close();
+});
+

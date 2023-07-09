@@ -90,6 +90,7 @@ function createUser($conn, $username, $email, $acType, $password, $statementErr)
     session_start();
     $_SESSION['username'] = $username;
     $_SESSION['acType'] = $acType;
+
     if ($_SESSION['acType'] === 'driver') {
         header("location: ../dashboard/driver.php");
         exit();
@@ -125,7 +126,7 @@ function loginUser($conn, $username, $password, $statementErr)
         $_SESSION['username'] = $usernameExists['username'];
         $_SESSION['acType'] = $usernameExists['acType'];
 
-        if ($_SESSION['acType'] === 'driver') {
+        if ($usernameExists['acType'] === 'driver') {
             //Redirect to driver dashboard
             header("location: ../dashboard/driver.php");
             exit();
@@ -223,9 +224,10 @@ function changePassword($conn, $currentPass, $newPass)
     return array(true, "Account details changed successfully");
 }
 
-function getUsers($conn){
+function getUsers($conn)
+{
     //Create a SQL query
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users WHERE acType <> 'admin'";
 
     //Execute the query
     $result = $conn->query($sql);
@@ -233,7 +235,8 @@ function getUsers($conn){
     return $result;
 }
 
-function deleteUser($conn, $userId){
+function deleteUser($conn, $userId)
+{
     //Create a SQL query
     $sql = "DELETE FROM users WHERE id=?";
 
@@ -241,7 +244,7 @@ function deleteUser($conn, $userId){
     $statement = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($statement, $sql)) {
-        return array(false,"Statement failed");
+        return array(false, "Statement failed");
         exit();
     }
 
@@ -251,4 +254,81 @@ function deleteUser($conn, $userId){
     mysqli_stmt_close($statement);
 
     return array(true, "User deleted successfully");
+}
+
+function editUser($conn, $userId, $acType)
+{
+    //Create a SQL query
+    $sql = "UPDATE users SET acType=? WHERE id = ?;";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false, "Statement failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "sd", $acType, $userId);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "User edited successfully");
+}
+
+function getUserLots($conn, $userId)
+{
+    //Create a SQL query
+    $sql = "SELECT * FROM lots WHERE userId = ?";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false, "Statement failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "d", $userId);
+    mysqli_stmt_execute($statement);
+
+    $result = mysqli_stmt_get_result($statement);
+
+    mysqli_stmt_close($statement);
+
+    return $result;
+}
+
+function createLot($conn, $userId, $name, $location, $capacity, $price)
+{
+
+    //Create a sql query
+    $sql = "INSERT INTO lots (userId, name, location, capacity, price) VALUES (?,?,?,?,?);";
+
+    //Initialize a prepared statement
+    $statement = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($statement, $sql)) {
+        return array(false, "Statement failed");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($statement, "sssss", $userId, $name, $location, $capacity, $price);
+    mysqli_stmt_execute($statement);
+
+    mysqli_stmt_close($statement);
+
+    return array(true, "Parking lot registered successfully");
+}
+
+function getAllLots($conn)
+{
+    //Create a SQL query
+    $sql = "SELECT * FROM lots";
+
+    //Execute the query
+    $result = $conn->query($sql);
+
+    return $result;
 }

@@ -1,10 +1,15 @@
 <?php
 require_once('../common/theme.php');
+require_once('../config/database.php');
+require_once('../utils/functions.php');
 
 session_start();
 if(empty($_SESSION['username'])){
     header('location: ../auth/login.php');
 }
+
+$userName = $_SESSION['username'];
+$user = usernameExists($conn, $userName);
 
 ?>
 

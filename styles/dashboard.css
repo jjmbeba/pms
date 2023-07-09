@@ -1,92 +1,219 @@
-@import url('../styles/common.css');
+@import url("../styles/common.css");
 
-.dashboard__container{
-    margin-left: -40px;
-    margin-top: 15px;
-    width: 100vw;
-    position: relative;
-    border-top: 2px solid var(--accent);
-    display: flex;
+.dashboard__container {
+  margin-left: -40px;
+  margin-top: 15px;
+  width: 100vw;
+  position: relative;
+  border-top: 2px solid var(--accent);
+  display: flex;
 }
 
-.sidebar{
-    position: fixed;
-    width: 20%;
-    height: 100vh;
-    border: 2px solid var(--primary);
-    border-top: none;
-    padding: 15px;
+.sidebar {
+  position: fixed;
+  width: 20%;
+  height: 100vh;
+  border: 2px solid var(--primary);
+  border-top: none;
+  padding: 15px;
 }
 
-.report__list{
-    list-style: none;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.report__list {
+  list-style: none;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .report__list li {
-    cursor: pointer;
-    color: var(--text);
+  cursor: pointer;
+  color: var(--text);
 }
 
-.report__list li:active{
-    text-decoration: underline;
+.report__list li:active {
+  text-decoration: underline;
 }
 
-.report__list > .active{
-    font-weight: bold;
-    font-size: 120%;
-    text-decoration: underline;
+.report__list > .active {
+  font-weight: bold;
+  font-size: 120%;
+  text-decoration: underline;
 }
 
-.report__area{
-    margin-left: 20%;
-    flex-grow: 1;
-    padding: 20px;
+.report__area {
+  margin-left: 20%;
+  flex-grow: 1;
+  padding: 20px;
 }
 
-.report__table{
-    border-collapse: collapse;
-    margin-left: 15%;
-    margin-top: 5%;
+.report__table {
+  border-collapse: collapse;
+  margin-left: 15%;
+  margin-top: 5%;
 }
 
-.report__table td, .report__table th{
-    border: 2px solid var(--primary);
-    padding: 8px;
+.report__table td,
+.report__table th {
+  border: 2px solid var(--primary);
+  padding: 8px;
 }
 
-td a{
-    text-decoration: none;
-    color: var(--text);
+td a {
+  text-decoration: none;
+  color: var(--text);
 }
 
-form input, td a{
-    padding: 4px 8px;
-    border: none;
-    cursor: pointer;
+td button,
+td a {
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
 }
 
-.edit__btn{
-    background-color: var(--text);
-    color: var(--background);
+.edit__btn {
+  background-color: var(--text);
+  color: var(--background);
 }
 
-.delete__btn{
-    background-color: crimson;
-    color: white;
+.delete__btn {
+  background-color: crimson;
+  color: white;
 }
 
 .invalid {
-    color: crimson;
-    margin-top: 10px;
-    margin-left: 15%;
-  }
-  
-  .success {
-    color: #4bb543;
-    margin-top: 10px;
-    margin-left: 15%;
-  }
+  color: crimson;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.success {
+  color: #4bb543;
+  margin-top: 10px;
+  margin-left: 15%;
+}
+
+.edit__modal, .createLot__modal {
+  max-width: 100vw;
+  left: 50%;
+  top: 30%;
+  transform: translateX(-50%);
+  padding: 15px;
+  background-color: var(--background);
+  color: var(--text);
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.6);
+}
+
+.editForm__container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  width: 350px;
+}
+
+.editForm__container h1 {
+  font-size: 18px;
+  position: relative;
+}
+
+.editForm__container h1::after {
+  position: absolute;
+  content: "";
+  width: 7%;
+  height: 2.5px;
+  background-color: var(--accent);
+  bottom: -5px;
+  left: 0;
+}
+
+.editForm__container form {
+  margin-top: 15px;
+}
+
+.input__container {
+  position: relative;
+  margin-top: 15px;
+}
+
+.input {
+  background-color: transparent;
+  border: 2px solid var(--accent);
+  width: 100%;
+  padding: 15px;
+  color: var(--text);
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+.input option {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.input__label {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  color: var(--text);
+  font-size: 1em;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+/* Selects element of class input__label that is preceeded by an element of class input that does not have its placeholder shown */
+
+.input:not(:placeholder-shown) ~ .input__label,
+.input:focus ~ .input__label {
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.7em;
+  top: 0;
+  left: 2px;
+  background-color: var(--background);
+  padding-inline: 10px;
+  border-left: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+  letter-spacing: 0.2em;
+}
+
+#close__btn, #closeCreateModal__btn {
+  width: 18px;
+  position: absolute;
+  right: 8%;
+  top: 8%;
+  fill: var(--accent);
+  cursor: pointer;
+}
+
+.submit__btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px 0;
+  background-color: var(--text);
+  border: none;
+  color: var(--background);
+  cursor: pointer;
+}
+
+.create__btn{
+  margin-top: 20px;
+  padding: 8px 10px;
+  background-color: var(--text);
+  border: none;
+  color: var(--background);
+  cursor: pointer;
+  font-weight: bold;
+  margin-inline: auto;
+  display: flex;
+  justify-self: center;
+}
+
+[data-tab-content]{
+  display: none;
+}
+
+.active[data-tab-content]{
+  display: block;
+}
