@@ -59,7 +59,6 @@ if (isset($_POST['submit']) && isset($_POST['redirect'])) {
             header("location:$redirect?error=$statementErr");
         }elseif ($result && $result[0] === true) {
             $successMessage = $result[1];
-            header("location:$redirect?success=$successMessage");
         }
     }
 }

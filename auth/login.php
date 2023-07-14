@@ -73,12 +73,12 @@ if (isset($_POST['submit'])) {
     </style>
 </head>
 
-<body class="<?php echo $theme;?>">
+<body class="<?php echo $theme; ?>">
     <a href="/pms" class="home__link">
         <img src="../assets/home.svg" alt="home" />
         <span>Home</span>
     </a>
-    <?php echo $theme === 'dark' ? "<img class='theme__icon' src='/pms/assets/sun.svg' alt='sun'>" : "<img class='theme__icon' src='/pms/assets/moon.svg' alt='moon'>";?>
+    <?php echo $theme === 'dark' ? "<img class='theme__icon' src='/pms/assets/sun.svg' alt='sun'>" : "<img class='theme__icon' src='/pms/assets/moon.svg' alt='moon'>"; ?>
     <div class="form__container">
         <h1>Login</h1>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
@@ -125,6 +125,6 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
     <script src="/pms/script.js"></script>
-</body>
+    </body>
 
 </html>

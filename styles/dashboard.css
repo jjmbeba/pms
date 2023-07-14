@@ -243,3 +243,31 @@ dialog::backdrop {
 .active[data-tab-content]{
   display: block;
 }
+
+.bookSlotLinkContainer{
+  display: flex ;
+  width: 100%;
+  justify-items: center;
+}
+
+.bookSlotLink{
+  padding: 8px 10px;
+  background-color: var(--secondary);
+  color: var(--background);
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.pay-btn{
+  background-color: var(--accent);
+  color: var(--background);
+  text-decoration: none;
+}
+
+.paid{
+  cursor: not-allowed;
+  background-color: #4bb543;;
+  color: white;
+  text-decoration: none;
+}

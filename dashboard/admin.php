@@ -7,8 +7,6 @@ require_once('../common/theme.php');
 //Initialize variables
 $successMessage = $statementErr  = '';
 
-
-
 //Fetch all users in the database
 $users = getUsers($conn);
 

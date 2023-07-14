@@ -27,14 +27,6 @@ tabs.forEach(tab => {
   })
 })
 
-createBtn.addEventListener('click',() => {
-  createModal.showModal();
-})
-
-closeCreateLotBtn.addEventListener('click',() => {
-  createModal.close();
-});
-
 //Password hidden and unhidden logic
 passwordControls.forEach((field) => {
   let passwordField = field.previousElementSibling;
@@ -64,16 +56,4 @@ themeIcon.addEventListener("click", () => {
 
   document.cookie = "theme=" + theme + "; path=/;";
 });
-
-
-//Edit user logic
-// editBtn.forEach((btn) => {
-//   btn.addEventListener("click", () => {
-//     editModal.showModal();
-//   });
-// })
-
-// closeButton.addEventListener("click", () => {
-//   editModal.close();
-// });
 

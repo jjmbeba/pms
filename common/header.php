@@ -1,5 +1,5 @@
 <?php
-require_once('common/theme.php');
+require_once('theme.php');
 
 session_start();
 if (isset($_SESSION['username'])) {
