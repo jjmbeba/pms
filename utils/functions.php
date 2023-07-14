@@ -498,7 +498,7 @@ function mpesaPay($conn, $number, $bookingId, $userId, $bookingName, $bookingLoc
     }    
     $ch = curl_init('https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest');
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer aFPemw2SuLbHtxtqOcCe2lIGSI8O',
+        'Authorization: Bearer ',
         'Content-Type: application/json'
     ]);
 
